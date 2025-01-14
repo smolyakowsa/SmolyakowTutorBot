@@ -5,7 +5,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from tokens import bot_token
-from texts import social_media, courses, info, price, booking, group_booking
+from texts import info, price, booking, group_booking
 
 bot = Bot(token=bot_token)
 storage = MemoryStorage()
@@ -24,12 +24,8 @@ keyboard = types.ReplyKeyboardMarkup(
             types.KeyboardButton(text="Групповые занятия")
         ],
         [
-            types.KeyboardButton(text="Курсы"),
+            types.KeyboardButton(text="Информация"),
             types.KeyboardButton(text="Прайс-лист")
-        ],
-        [
-            types.KeyboardButton(text="Соц. сети"),
-            types.KeyboardButton(text="Информация")
         ],
         [
             types.KeyboardButton(text="Обратиться лично")
@@ -50,14 +46,10 @@ async def handle_text(message: types.Message, state: FSMContext):
 
     if message.text == "Записаться на урок":
         await message.answer(booking)
-    elif message.text == "Курсы":
-        await message.answer(courses)
     elif message.text == "Групповые занятия":
         await message.answer(group_booking)
     elif message.text == "Прайс-лист":
         await message.answer(price)
-    elif message.text == "Соц. сети":
-        await message.answer(social_media, parse_mode='Markdown')
     elif message.text == "Информация":
         await message.answer(info)
     elif message.text == "Обратиться лично":
